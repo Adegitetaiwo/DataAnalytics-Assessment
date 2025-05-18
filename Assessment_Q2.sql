@@ -7,9 +7,9 @@
 WITH customer_monthly_transaction_frequency AS (
 SELECT 
 	customer.id AS user_id, 
-    YEAR(deposit.transaction_date) AS year, 
-    MONTH(deposit.transaction_date) AS month, 
-    COALESCE(COUNT(deposit.confirmed_amount),0) AS saving_count
+	YEAR(deposit.transaction_date) AS year, 
+    	MONTH(deposit.transaction_date) AS month, 
+    	COALESCE(COUNT(deposit.confirmed_amount),0) AS saving_count
 FROM users_customuser AS customer
 LEFT JOIN savings_savingsaccount AS deposit
 ON customer.id = deposit.owner_id
@@ -39,8 +39,8 @@ categorized_user AS (
 SELECT 
 	user_id,
     CASE 
-		-- Some users avg transaction are bewteen the provided range, so it best to round them to whole number or choose a range that consider decimal numbers
-		WHEN ROUND(COALESCE(avg_transactions_per_month, 0),0) >= 10 THEN 'High Frequency'
+	-- Some users avg transaction are bewteen the provided range, so it best to round them to whole number or choose a range that consider decimal numbers
+	WHEN ROUND(COALESCE(avg_transactions_per_month, 0),0) >= 10 THEN 'High Frequency'
         WHEN ROUND(COALESCE(avg_transactions_per_month, 0),0) BETWEEN 3 AND 9 THEN 'Medium Frequency'
         WHEN ROUND(COALESCE(avg_transactions_per_month, 0),0) <= 2 THEN 'Low Frequency'
 	END AS frequency_category,
@@ -51,7 +51,7 @@ GROUP BY user_id
 
 SELECT 
 	frequency_category,
-    COUNT(user_id) AS customer_count,
-    AVG(avg_transactions_per_month) AS avg_transactions_per_month
+	COUNT(user_id) AS customer_count,
+    	AVG(avg_transactions_per_month) AS avg_transactions_per_month
 FROM categorized_user
 GROUP BY frequency_category;

@@ -2,7 +2,7 @@
 
 ## Questions, Approach, Challenges
 1. Question. Write a query to find customers with at least one funded savings plan AND one funded investment plan, sorted by total deposits.
-  ### Per-Question Explanations:
+--  ### Per-Question Explanations:
 - The approach i used was to break down the question into 5 chuncks in form of steps.
 - I then created virtual tables using each of them to solve each of the steps.
 - First, i created a virtual table that contain the list of plan that are savings plan and did a inner join with the transaction table
